@@ -25,14 +25,13 @@ export default function RootLayout({ children }) {
               <a href="#" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">Salaries</a>
             </div>
             
-            {/* Visible on all screens, shrinks slightly on mobile */}
             <a href="/register?role=employer" className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 transition-colors hover:bg-slate-50 sm:px-4 sm:py-2 sm:text-sm">
               Post a job <span className="hidden sm:inline">— free</span>
             </a>
           </div>
         </nav>
         
-        {/* Main Content Wrapper - No more width restrictions here! */}
+        {/* Main Content Wrapper - No width restrictions here! */}
         <main className="w-full">
           {children}
         </main>
