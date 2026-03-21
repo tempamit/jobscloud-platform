@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Notice the url line is gone!
+}
+
+model City {
+  id      Int    @id @default(autoincrement())
+  slug    String @unique // e.g., "bangalore", "remote"
+  name    String // e.g., "Bangalore", "Remote"
+  country String? // e.g., "India"
+  
+  jobs    Job[]
+}
+
+model TechStack {
+  id       Int    @id @default(autoincrement())
+  slug     String @unique // e.g., "python", "react"
+  name     String // e.g., "Python", "React JS"
+  category String? // e.g., "Backend", "Frontend"
+  
+  jobs     Job[]
+}
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String   // e.g., "Senior Python Developer"
+  company     String?  // e.g., "TechCorp India"
+  description String?  @db.Text // Full job description
+  url         String   @unique // Link to original post (prevents duplicate scraping)
+  
+  // Foreign Keys linking to City and TechStack
+  cityId      Int
+  techStackId Int
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  city        City      @relation(fields: [cityId], references: [id])
+  techStack   TechStack @relation(fields: [techStackId], references: [id])
+}
