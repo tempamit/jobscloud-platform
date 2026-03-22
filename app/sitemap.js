@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 
 export default async function sitemap() {
   // Update this line to your actual application URL
+  // Update this line to your actual application URL
+  // Update this line to your actual application URL
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const cities = await prisma.city.findMany({ select: { slug: true } });
