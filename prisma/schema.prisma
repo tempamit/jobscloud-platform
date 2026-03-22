@@ -12,7 +12,7 @@ model City {
   slug      String   @unique
   jobs      Job[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt // <-- Add @default(now()) here
 }
 
 model TechStack {
@@ -21,7 +21,7 @@ model TechStack {
   slug      String   @unique
   jobs      Job[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt // <-- Add @default(now()) here
 }
 
 model Job {
