@@ -1,82 +1,66 @@
-'use client';
+import { prisma } from "@/lib/db";
+import Link from "next/link";
+import SearchBar from "@/components/SearchBar"; // We will move the search logic here
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-
-export default function Home() {
-  const router = useRouter();
-  const [city, setCity] = useState('');
-  const [stack, setStack] = useState('');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    
-    // Format inputs into URL-friendly slugs (e.g., "New Delhi" -> "new-delhi")
-    const citySlug = city.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-    const stackSlug = stack.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-
-    // Route logic based on what the user typed
-    if (citySlug && stackSlug) {
-      router.push(`/jobs/${citySlug}/${stackSlug}`);
-    } else if (citySlug) {
-      // If we only have a city, we could route to a city-only page, but for now, send to all jobs
-      router.push(`/jobs`); 
-    } else if (stackSlug) {
-      router.push(`/jobs`);
-    } else {
-      router.push(`/jobs`);
-    }
-  };
+export default async function Home() {
+  // 1. Fetch the 6 newest jobs for the homepage "Live Feed"
+  const featuredJobs = await prisma.job.findMany({
+    take: 6,
+    orderBy: { createdAt: 'desc' },
+    include: { city: true, techStack: true }
+  });
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Hero Section */}
+      {/* Hero & Search Section */}
       <main className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl">
           Find your next tech job <br className="hidden sm:block" />
           <span className="text-[#1D9E75]">without the noise.</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
-          JobsCloud connects top developers with the best startups and tech companies across India. 
-        </p>
-
-        {/* The Active Search Bar */}
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl bg-white p-2 shadow-lg sm:p-4 border border-slate-200">
-          <form onSubmit={handleSearch} className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                placeholder="Job title or tech stack (e.g. React)"
-                value={stack}
-                onChange={(e) => setStack(e.target.value)}
-                className="w-full rounded-xl border-0 bg-slate-50 px-4 py-4 text-slate-900 outline-none ring-1 ring-inset ring-slate-200 focus:ring-2 focus:ring-inset focus:ring-[#1D9E75]"
-              />
-            </div>
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                placeholder="City (e.g. Pune)"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="w-full rounded-xl border-0 bg-slate-50 px-4 py-4 text-slate-900 outline-none ring-1 ring-inset ring-slate-200 focus:ring-2 focus:ring-inset focus:ring-[#1D9E75]"
-              />
-            </div>
-            <button
-              type="submit"
-              className="rounded-xl bg-[#1D9E75] px-8 py-4 font-bold text-white transition-colors hover:bg-[#0F6E56]"
-            >
-              Search
-            </button>
-          </form>
+        
+        {/* We'll move the search inputs into a separate client component shortly */}
+        <div className="mx-auto mt-10 max-w-3xl">
+           <SearchBar /> 
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm text-slate-500">
-          <span>Popular:</span>
-          <Link href="/jobs/bangalore/node" className="rounded-full bg-slate-200 px-3 py-1 font-medium hover:bg-slate-300 transition-colors">Node in Bangalore</Link>
-          <Link href="/jobs/pune/react" className="rounded-full bg-slate-200 px-3 py-1 font-medium hover:bg-slate-300 transition-colors">React in Pune</Link>
-          <Link href="/jobs/remote/python" className="rounded-full bg-slate-200 px-3 py-1 font-medium hover:bg-slate-300 transition-colors">Remote Python</Link>
+        {/* Featured Jobs Grid */}
+        <div className="mt-24 text-left">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Latest Opportunities</h2>
+            <Link href="/jobs" className="text-sm font-semibold text-[#1D9E75] hover:underline">
+              View all jobs →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredJobs.map((job) => (
+              <Link 
+                key={job.id} 
+                href={`/jobs/${job.city?.slug}/${job.techStack?.slug}`}
+                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-[#1D9E75] hover:shadow-md"
+              >
+                <div className="flex flex-col h-full justify-between">
+                  <div>
+                    <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-3">
+                      {job.techStack?.name || 'Tech'}
+                    </span>
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#1D9E75] transition-colors line-clamp-1">
+                      {job.title}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-slate-500">{job.company}</p>
+                  </div>
+                  
+                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-xs text-slate-400 font-medium">
+                       {job.city?.name || 'Remote'}
+                    </span>
+                    <span className="text-xs font-bold text-[#1D9E75]">Apply →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
     </div>
