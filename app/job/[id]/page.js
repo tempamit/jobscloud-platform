@@ -64,13 +64,13 @@ export default async function JobDetails({ params }) {
             <p className="mt-2 text-sm text-slate-400">Apply via the official portal below.</p>
             
             <a 
-              href={job.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="mt-8 block w-full rounded-xl bg-[#1D9E75] py-4 text-center font-bold text-white transition-all hover:bg-[#0F6E56] hover:scale-[1.02]"
-            >
-              Apply Now
-            </a>
+            href={`/api/apply/${job.id}`} // Updated path to match the new folder structure
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="mt-8 block w-full rounded-xl bg-[#1D9E75] py-4 text-center font-bold text-white transition-all hover:bg-[#0F6E56]"
+          >
+            Apply Now
+          </a>
             
             <div className="mt-6 text-[10px] text-slate-500 uppercase tracking-widest text-center">
               Verified by JobsCloud

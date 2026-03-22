@@ -23,6 +23,13 @@ model TechStack {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt // <-- Add @default(now()) here
 }
+model JobClick {
+  id        String   @id @default(cuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id])
+  clickedAt DateTime @default(now())
+  ipAddress String?  // Optional: to prevent double-counting
+}
 
 model Job {
   id          String   @id @default(cuid())
@@ -32,6 +39,7 @@ model Job {
   url         String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  clicks      JobClick[] // Add this line
 
   cityId      String
   city        City     @relation(fields: [cityId], references: [id])
