@@ -1,9 +1,6 @@
 {
   "/api/apply/[id]/route": "app/api/apply/[id]/route.js",
   "/job/[id]/page": "app/job/[id]/page.js",
-  "/jobs/[city]/[stack]/page": "app/jobs/[city]/[stack]/page.js",
   "/jobs/page": "app/jobs/page.js",
-  "/login/page": "app/login/page.js",
-  "/page": "app/page.js",
-  "/register/page": "app/register/page.js"
+  "/page": "app/page.js"
 }

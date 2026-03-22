@@ -14,6 +14,15 @@ export default async function Home() {
     }
   });
 
+  // Add this query to your Home() function in app/page.js
+const trendingJobs = await prisma.job.findMany({
+  take: 3,
+  orderBy: {
+    clicks: { _count: 'desc' } // Most clicked roles
+  },
+  include: { city: true, techStack: true }
+});
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}

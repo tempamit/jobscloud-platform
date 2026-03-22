@@ -37,6 +37,7 @@ model Job {
   company     String?  
   description String
   url         String   @unique
+  source      String   @default("Manual") // ✅ "LinkedIn", "Naukri", etc.
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   clicks      JobClick[] // Add this line
