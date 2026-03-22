@@ -69,14 +69,11 @@ export default async function AllJobsPage() {
                   <span className="text-xs font-medium text-slate-400">
                     {new Date(job.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                   </span>
-                  <a 
-                    href={job.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full rounded-xl bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-slate-800 sm:w-auto"
-                  >
-                    Apply Now
-                  </a>
+                  <a href={`/jobs/${job.id}`}
+                  className="w-full rounded-xl bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-slate-800 sm:w-auto"
+                >
+                  Apply Now
+                </a>
                 </div>
                 
               </div>
