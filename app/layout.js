@@ -1,50 +1,73 @@
-import './globals.css';
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Link from "next/link";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "JobsCloud | Premium Tech Jobs in India",
-  description: "Connecting top developers with India's best startups and tech companies.",
-  metadataBase: new URL('https://www.smartevent.in'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'JobsCloud',
-    description: 'Find your next tech role in India.',
-    images: '/og-image.png', // You can add a logo here later
-  },
+  title: "JobsCloud | Find Your Next Tech Role",
+  description: "The ultimate platform for developers to find remote and local tech jobs without the noise.",
+  metadataBase: new URL("https://jobs.ipds.cloud"),
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-[#1D9E75] selection:text-white" suppressHydrationWarning>
-        
-        {/* Master Navigation Bar - Now Full Width & Mobile Responsive */}
-        <nav className="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md sm:px-6 lg:px-8">
-          <a href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-slate-900 transition-opacity hover:opacity-80">
-            <span className="h-2 w-2 rounded-full bg-[#1D9E75]"></span>
-            JobsCloud
-          </a>
-          
-          <div className="flex items-center gap-3 sm:gap-4">
-            {/* Hidden on mobile, visible on medium screens and up */}
-            <div className="hidden items-center gap-1 md:flex">
-              <a href="/jobs/remote/react" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">Browse jobs</a>
-              <a href="/jobs/bangalore/python" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">Cities</a>
-              <a href="#" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">Salaries</a>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body 
+        className={`${inter.className} min-h-screen bg-slate-50 text-slate-900`} 
+        suppressHydrationWarning={true}
+      >
+        {/* Main Navigation Header */}
+        <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            {/* Logo Section */}
+            <div className="flex items-center gap-8">
+              <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-900">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1D9E75] text-white">
+                  J
+                </div>
+                <span>Jobs<span className="text-[#1D9E75]">Cloud</span></span>
+              </Link>
+
+              {/* Desktop Nav Links */}
+              <nav className="hidden md:flex items-center gap-6">
+                <Link href="/jobs" className="text-sm font-medium text-slate-600 hover:text-[#1D9E75] transition-colors">
+                  Browse Jobs
+                </Link>
+                <Link href="/jobs/remote/react" className="text-sm font-medium text-slate-600 hover:text-[#1D9E75] transition-colors">
+                  Remote Roles
+                </Link>
+              </nav>
             </div>
-            
-            <a href="/register?role=employer" className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 transition-colors hover:bg-slate-50 sm:px-4 sm:py-2 sm:text-sm">
-              Post a job <span className="hidden sm:inline">— free</span>
-            </a>
+
+            {/* CTA Section */}
+            <div className="flex items-center gap-4">
+              <Link href="/login" className="hidden sm:block text-sm font-semibold text-slate-700 hover:text-slate-900">
+                Log in
+              </Link>
+              <Link 
+                href="/register?role=employer" 
+                className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition-all active:scale-95"
+              >
+                Post a Job
+              </Link>
+            </div>
           </div>
-        </nav>
-        
-        {/* Main Content Wrapper - No width restrictions here! */}
-        <main className="w-full">
+        </header>
+
+        {/* Page Content */}
+        <div className="relative">
           {children}
-        </main>
-        
+        </div>
+
+        {/* Simple Footer */}
+        <footer className="border-t border-slate-200 bg-white py-12 mt-20">
+          <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+            <p className="text-sm text-slate-500">
+              © {new Date().getFullYear()} JobsCloud by Interactive Pixels. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );
