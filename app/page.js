@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db";
 import Link from "next/link";
-import SearchBar from "@/components/SearchBar"; // We will move the search logic here
+import SearchBar from "@/components/SearchBar";
 
 export default async function Home() {
   // 1. Fetch the 6 newest jobs for the homepage "Live Feed"
@@ -19,7 +19,6 @@ export default async function Home() {
           <span className="text-[#1D9E75]">without the noise.</span>
         </h1>
         
-        {/* We'll move the search inputs into a separate client component shortly */}
         <div className="mx-auto mt-10 max-w-3xl">
            <SearchBar /> 
         </div>
@@ -37,7 +36,8 @@ export default async function Home() {
             {featuredJobs.map((job) => (
               <Link 
                 key={job.id} 
-                href={`/jobs/${job.city?.slug}/${job.techStack?.slug}`}
+                // ✅ CORRECTION: Point to the singular /job/[id] route
+                href={`/job/${job.id}`} 
                 className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-[#1D9E75] hover:shadow-md"
               >
                 <div className="flex flex-col h-full justify-between">
