@@ -1,1 +1,12 @@
-{"timestamp":"00:00:03.121","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:03.505","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:10.702","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:13.399","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:14.573","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:36.856","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:41.240","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:43.414","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:44.231","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:01:08.141","source":"Server","level":"WARN","message":"[next-auth][warn][NEXTAUTH_URL] \"\\nhttps://next-auth.js.org/warnings#nextauth_url\""}
+{"timestamp":"00:01:09.899","source":"Server","level":"WARN","message":"[next-auth][warn][NEXTAUTH_URL] \"\\nhttps://next-auth.js.org/warnings#nextauth_url\""}
+{"timestamp":"00:01:21.293","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:01:50.878","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
