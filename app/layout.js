@@ -1,8 +1,17 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'JobsCloud — Top Tech Jobs',
-  description: 'Find the best remote and local tech jobs on jobs.ipds.cloud.',
+  title: "JobsCloud | Premium Tech Jobs in India",
+  description: "Connecting top developers with India's best startups and tech companies.",
+  metadataBase: new URL('https://www.smartevent.in'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'JobsCloud',
+    description: 'Find your next tech role in India.',
+    images: '/og-image.png', // You can add a logo here later
+  },
 };
 
 export default function RootLayout({ children }) {

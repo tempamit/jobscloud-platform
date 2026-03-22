@@ -1,7 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/dashboard/employer/page": "app/dashboard/employer/page.js",
-  "/jobs/page": "app/jobs/page.js",
-  "/page": "app/page.js",
-  "/register/page": "app/register/page.js"
+  "/sitemap.xml/route": "app/sitemap.xml/route.js"
 }
