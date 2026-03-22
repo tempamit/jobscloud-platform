@@ -1,10 +1,8 @@
 import { prisma } from "@/lib/db";
 
 export default async function sitemap() {
-  // Update this line to your actual application URL
-  // Update this line to your actual application URL
-  // Update this line to your actual application URL
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  // Use a direct string to avoid "undefined" errors
+  const baseUrl = "https://jobs.ipds.cloud";
 
   const cities = await prisma.city.findMany({ select: { slug: true } });
   const stacks = await prisma.techStack.findMany({ select: { slug: true } });
